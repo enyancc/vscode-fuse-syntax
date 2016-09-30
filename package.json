@@ -1,0 +1,66 @@
+{
+  "name": "vscode-fuse-syntax",
+  "displayName": "Fuse Syntax",
+  "description": "Syntax Highlighting for *.unoproj and *.ux files ",
+  "version": "0.0.1",
+  "publisher": "naumovs",
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "categories": [
+    "Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "unoproj",
+        "aliases": [
+          "Fuse project",
+          "unoproj"
+        ],
+        "extensions": [
+          ".unoproj"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "ux",
+        "aliases": [
+          "Fuse UX",
+          "ux"
+        ],
+        "extensions": [
+          ".ux"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ux",
+        "scopeName": "text.xml",
+        "path": "./syntaxes/ux.tmLanguage"
+      },
+      {
+        "language": "unoproj",
+        "scopeName": "text.unoproj",
+        "path": "./syntaxes/unoproj.tmLanguage"
+      }
+    ]
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergiirocks/vscode-fuse-syntax.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergiirocks/vscode-fuse-syntax/issues"
+  },
+  "homepage": "https://github.com/sergiirocks/vscode-fuse-syntax#readme"
+}
