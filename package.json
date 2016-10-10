@@ -88,9 +88,9 @@
   },
   "homepage": "https://github.com/sergiirocks/vscode-fuse-syntax#readme",
   "dependencies": {
-    "vscode": "1.0.0"
   },
   "devDependencies": {
+    "vscode": "1.0.0",
     "@types/node": "^6.0.45",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
