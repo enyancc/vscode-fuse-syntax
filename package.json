@@ -1,8 +1,8 @@
 {
   "name": "vscode-fuse-syntax",
-  "displayName": "Fuse Syntax (Fusetools)",
+  "displayName": "Fuse language",
   "description": "Syntax Highlighting for *.uno and *.ux files ",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "naumovs",
   "engines": {
     "vscode": "^1.6.0"
@@ -19,10 +19,7 @@
     "languages": [
       {
         "id": "unoproj",
-        "aliases": [
-          "Fuse project",
-          "unoproj"
-        ],
+        "aliases": [],
         "extensions": [
           ".unoproj"
         ],
@@ -43,10 +40,8 @@
       {
         "id": "ux",
         "aliases": [
-          "UX",
-          "ux",
-          "fuseux"
-        ],
+          "UX"
+          ],
         "extensions": [
           ".ux"
         ],
