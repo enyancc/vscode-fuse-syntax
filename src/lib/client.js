@@ -17,6 +17,10 @@ export const request = function request (payload) {
   return requestStack[payload.Id].promise;
 }
 
+export const event = function event (payload) {
+  send(spawnClient(), "Event", JSON.stringify(payload));
+}
+
 const reply = function reply(id, payload) {
   if (requestStack[id]) {
     requestStack[id].resolve(payload);

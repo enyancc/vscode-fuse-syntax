@@ -41,7 +41,7 @@ export class CompletionProvider implements CompletionItemProvider {
           // Full source of document where suggestion is requested
           "Text": source,
           // 1-indexed text position within Text where suggestion is requested
-          "CaretPosition": { "Line": position.line + 1, "Character": position.character + 1 }
+          "CaretPosition": { "Line": 1 + position.line , "Character": 1 + position.character }
         }
       }).then((payload) => {
         if (payload.Status === 'Success') {
