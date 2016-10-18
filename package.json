@@ -2,7 +2,7 @@
   "name": "vscode-fuse-syntax",
   "displayName": "Fuse language",
   "description": "Syntax Highlighting for *.uno and *.ux files ",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "naumovs",
   "engines": {
     "vscode": "^1.6.0"
@@ -35,7 +35,7 @@
           ".uno",
           ".unotrace"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./language-uno.json"
       },
       {
         "id": "ux",
@@ -45,7 +45,7 @@
         "extensions": [
           ".ux"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./language-ux.json"
       }
     ],
     "grammars": [

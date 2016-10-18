@@ -11,6 +11,9 @@ Still confused? Click "Get Started" above.
 
 ## Changelist
 
+1.1.1
+  - Fix comments in the UX files
+
 1.1.0
   - Now the selected node in UX file is highlighted in the preview.
 
