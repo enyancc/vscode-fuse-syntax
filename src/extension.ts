@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import { StatusBar } from './Code/StatusBar';
 import { FuseDaemon } from './Fuse/Daemon';
 import { fuseLocalPreview, fuseAndroidPreview, fuseiOSPreview, fuseLocalDebug } from './Fuse/Launcher';
-import { CompletionProvider } from './Providers/CompletionProvider';
+import { LanguageProvider } from './Providers/LanguageProvider';
 import { HighlightProvider } from './Providers/HighlightProvider';
 import { Diagnostics } from './Providers/Diagnostics';
 
@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
     statusBar = new StatusBar();
 
     // Daemon connection/disconnect
-    FuseDaemon.Instance.connected = () => {
+    FuseDaemon.Instance.connected = async () => {
         statusBar.connected();
         FuseDaemon.Instance.subscribe("Fuse.BuildStarted");
         // Client.Instance.subscribe("Fuse.BuildLogged");
@@ -86,11 +86,15 @@ export function activate(context: vscode.ExtensionContext) {
     FuseDaemon.Instance.connect();
 
     // Syntax hiliting
-    vscode.languages.registerDocumentHighlightProvider('ux', new HighlightProvider());
+    vscode.languages.registerDocumentHighlightProvider({ scheme: 'file', language: 'ux' }, new HighlightProvider());
 
+    const uxLanguageFeatures = new LanguageProvider('UX');
+    const unoLanguageFeatures = new LanguageProvider('Uno');
     // Auto completion
-    vscode.languages.registerCompletionItemProvider('ux', new CompletionProvider('UX'));
-    vscode.languages.registerCompletionItemProvider('uno', new CompletionProvider('Uno'));
+    vscode.languages.registerCompletionItemProvider({ scheme: 'file', language: 'ux' }, uxLanguageFeatures);
+    vscode.languages.registerCompletionItemProvider({ scheme: 'file', language: 'uno' }, unoLanguageFeatures);
+    vscode.languages.registerDefinitionProvider({ scheme: 'file', language: 'ux' }, uxLanguageFeatures);
+    vscode.languages.registerDefinitionProvider({ scheme: 'file', language: 'uno' }, unoLanguageFeatures);
 }
 
 

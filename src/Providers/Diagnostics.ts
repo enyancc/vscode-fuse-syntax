@@ -51,11 +51,10 @@ export class Diagnostics {
             };
         }
 
-
         const diagnostic = new Diagnostic(new Range(data.Data.StartPosition.Line - 1,
-            data.Data.StartPosition.Character,
+            data.Data.StartPosition.Character - 1,
             data.Data.EndPosition.Line - 1,
-            data.Data.EndPosition.Character), data.Data.Message,
+            data.Data.EndPosition.Character - 1), data.Data.Message,
             severity);
 
 

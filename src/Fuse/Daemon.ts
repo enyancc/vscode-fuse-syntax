@@ -1,6 +1,5 @@
 import { spawn, ChildProcess } from 'child_process';
 import { Deferred } from '../deferred';
-import { getOutputChannel, writeToChannel } from '../Code/Output';
 
 export class FuseDaemon {
 
@@ -12,7 +11,7 @@ export class FuseDaemon {
 
     requestId: number = 1;
     subscriptionId: number = 1;
-    buffer: Buffer = new Buffer(0);
+    buffer: Buffer = Buffer.alloc(0);
     fuseClient?: ChildProcess;
     requests: {
         [x: number]: any
@@ -74,11 +73,13 @@ export class FuseDaemon {
         }
     }
 
-    private onData(data: any) {        
+    private onData(data: any) {
         var latestBuf = Buffer.concat([FuseDaemon.Instance.buffer, data]);
         FuseDaemon.Instance.buffer = FuseDaemon.Instance.parseMsgFromBuffer(latestBuf, (message: string) => {
             const json = JSON.parse(message);
             FuseDaemon.Instance.handleData(json.Id, json);
+
+            console.log('message', json)
         });
     }
 
@@ -117,7 +118,7 @@ export class FuseDaemon {
     }
 
     private handleData(id: number, payload: FuseBuildEvents): void {
-        if (payload.Name) {            
+        if (payload.Name) {
             switch (payload.Name) {
                 case "Fuse.BuildStarted":
                     if (this.buildStarted) {
@@ -193,14 +194,14 @@ export interface CaretPosition {
 
 type FuseSyntaxType = "UX" | "Uno" | string;
 
-type FuseRequests = FuseSubscribeRequest | FuseGetCodeSuggestionsRequest;
+type FuseRequests = FuseSubscribeRequest | FuseGetCodeSuggestionsRequest | FuseGetGotoDefinitionRequest;
 type FuseEvents =  FuseSelectionChangedEvent
 
 
 type FuseSubscribeRequest = {
     Id?: number, // Unique request id
 	Name: "Subscribe",
-	Arguments: 
+	Arguments:
 	{
 		Filter: string, // .Net style regex filtering incoming events based on type
 		Replay: boolean, // Use replay if you want to receive messages that were sent before you connected
@@ -209,15 +210,27 @@ type FuseSubscribeRequest = {
 }
 
 
-type FuseGetCodeSuggestionsRequest = {
+export type FuseGetCodeSuggestionsRequest = {
     Id?: number, // Unique request id
 	Name: "Fuse.GetCodeSuggestions",
-	Arguments: 
+	Arguments:
 	{
 		SyntaxType: FuseSyntaxType, // Typically "UX" or "Uno"
 		Path: string, // Path to document where suggestion is requested
-		Text: string, // Full source of document where suggestion is requested 
-		CaretPosition: CaretPosition // 1-indexed text position within Text where suggestion is requested 
+		Text: string, // Full source of document where suggestion is requested
+		CaretPosition: CaretPosition // 1-indexed text position within Text where suggestion is requested
+	}
+}
+
+export type FuseGetGotoDefinitionRequest = {
+    Id?: number, // Unique request id
+	Name: "Fuse.GotoDefinition",
+	Arguments:
+	{
+		SyntaxType: FuseSyntaxType, // Typically "UX" or "Uno"
+		Path: string, // Path to document where suggestion is requested
+		Text: string, // Full source of document where suggestion is requested
+		CaretPosition: CaretPosition // 1-indexed text position within Text where suggestion is requested
 	}
 }
 
@@ -235,7 +248,7 @@ type FuseBuildEvents = FuseBuildStartedEvent | FuseBuildEndedEvent | FuseBuildIs
 
 type FuseBuildStartedEvent = {
     Name: "Fuse.BuildStarted",
-	SubscriptionId?: number, 
+	SubscriptionId?: number,
 	Data:
     {
 		BuildType: "FullCompile" | "LoadMarkup", // This means the whole project is built. Can also be "LoadMarkup", which means that we're live-reloading an already built app
@@ -249,7 +262,7 @@ type FuseBuildStartedEvent = {
 
 type FuseBuildLoggedEvent = {
     Name: "Fuse.BuildLogged",
-	SubscriptionId?: number, 
+	SubscriptionId?: number,
 	Data:
 	{
 		BuildId:  string,
@@ -259,7 +272,7 @@ type FuseBuildLoggedEvent = {
 
 export type FuseBuildIssueDetectedEvent = {
 	Name: "Fuse.BuildIssueDetected",
-	SubscriptionId: number, 
+	SubscriptionId: number,
 	Data:
 	{
 		BuildId:  string;
@@ -275,7 +288,7 @@ export type FuseBuildIssueDetectedEvent = {
 
 type FuseBuildEndedEvent = {
 	Name: "Fuse.BuildEnded",
-	SubscriptionId: number, 
+	SubscriptionId: number,
 	Data:
 	{
 		BuildId:  string,
