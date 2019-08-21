@@ -1,15 +1,15 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import StatusBar from './statusbar';
+import { StatusBar } from './Code/StatusBar';
 import { FuseDaemon } from './Fuse/Daemon';
 import { fuseLocalPreview, fuseAndroidPreview, fuseiOSPreview, fuseLocalDebug } from './Fuse/Launcher';
 import { CompletionProvider } from './Providers/CompletionProvider';
 import { HighlightProvider } from './Providers/HighlightProvider';
-import Diagnostics from './Providers/Diagnostics';
+import { Diagnostics } from './Providers/Diagnostics';
 
-let statusBar;
-let diagnostics;
+let statusBar: StatusBar;
+let diagnostics: Diagnostics;
 
 export function activate(context: vscode.ExtensionContext) {
 

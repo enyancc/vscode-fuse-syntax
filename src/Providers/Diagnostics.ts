@@ -1,7 +1,7 @@
 import { DiagnosticCollection, DiagnosticSeverity, languages, Uri, Diagnostic, Range, Position } from 'vscode';
 import { CaretPosition, FuseBuildIssueDetectedEvent } from '../Fuse/Daemon';
 
-export default class Diagnostics {
+export class Diagnostics {
     collection: DiagnosticCollection;
     diagnostics: { [x: string]: Diagnostic[] } = {};
 
@@ -15,7 +15,12 @@ export default class Diagnostics {
     }
 
     public set(data: FuseBuildIssueDetectedEvent) {
-        var severity: DiagnosticSeverity = 0;
+
+        if (!data.Data.Path) {
+            return;
+        }
+
+        let severity: DiagnosticSeverity = 0;
 
         switch (data.Data.IssueType) {
             case "Error":
@@ -46,11 +51,13 @@ export default class Diagnostics {
             };
         }
 
+
         const diagnostic = new Diagnostic(new Range(data.Data.StartPosition.Line - 1,
             data.Data.StartPosition.Character,
             data.Data.EndPosition.Line - 1,
             data.Data.EndPosition.Character), data.Data.Message,
             severity);
+
 
         if (data.Data.Path in this.diagnostics) {
             this.diagnostics[data.Data.Path].push(diagnostic);

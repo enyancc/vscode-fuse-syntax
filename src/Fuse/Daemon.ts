@@ -1,6 +1,6 @@
 import { spawn, ChildProcess } from 'child_process';
 import { Deferred } from '../deferred';
-import { getOutputChannel, writeToChannel } from '../outputchannel';
+import { getOutputChannel, writeToChannel } from '../Code/Output';
 
 export class FuseDaemon {
 
