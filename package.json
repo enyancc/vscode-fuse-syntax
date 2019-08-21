@@ -1,6 +1,6 @@
 {
     "name": "vscode-fuse-syntax",
-    "displayName": "Fuse Open language",
+    "displayName": "fuseopen (fusetools) 2.0",
     "description": "UX and Uno IntelliSense, debugging and more",
     "version": "2.0.2",
     "publisher": "naumovs",
