@@ -1,21 +1,34 @@
 # [vscode-fuse-syntax](https://github.com/sergiirocks/vscode-fuse-syntax)
 
-Unofficial extention with UX and Uno code completion support
+Refactored and upgraded Fuse Extention.
 
-## Install
+## New
 
-In VSC press Ctrl+Shift+P (Cmd+Shift+P on Mac) then type ">ext install", hit enter, search "Fuse language".
+ - Go to Definition in .ux files (CMD + Click)
+ - .unoproj json schema
+ - Updated .ux syntax
+ - IntelliSense kinds
 
-Still confused? Click "Get Started" above.
+## Features from Fuse Extention
+
+- Syntax highlighting
+- Code completion
+- Launch preview from commands in VS Code, including local debug
+- Send selection from VS Code to Fuse Studio
+- Update UX from Fuse Studio
+- Diagnostics on compiler errors, list appears in the PROBLEMS-tab
+- Keybindings for starting preview window
 
 
-## Changelist
+## Extension Settings
 
-1.1.1
-  - Fix comments in the UX files
+This extension currently has no configurable settings.
 
-1.1.0
-  - Now the selected node in UX file is highlighted in the preview.
+## Known Issues
 
-1.0.0
-  - Initial release
+See issues on repository.
+
+
+## Develop
+
+Run `yarn` after cloning. Start code in the directory using `code .`. Press F5 to launch extension development sandbox.
