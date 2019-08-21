@@ -78,8 +78,6 @@ export class FuseDaemon {
         FuseDaemon.Instance.buffer = FuseDaemon.Instance.parseMsgFromBuffer(latestBuf, (message: string) => {
             const json = JSON.parse(message);
             FuseDaemon.Instance.handleData(json.Id, json);
-
-            console.log('message', json)
         });
     }
 
