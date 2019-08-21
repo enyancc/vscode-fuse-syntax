@@ -1,125 +1,121 @@
 {
-  "name": "vscode-fuse-syntax",
-  "displayName": "Fuse Open language",
-  "description": "Code Completion",
-  "version": "1.1.1",
-  "publisher": "naumovs",
-  "engines": {
-    "vscode": "^1.12.0"
-  },
-  "icon": "preview.jpg",
-  "main": "./out/src/extension",
-  "categories": [
-    "Programming  Languages",
-    "Linters",
-    "Languages"
-  ],
-  "activationEvents": [
-    "onLanguage:uno",
-    "onLanguage:unoproj",
-    "onLanguage:ux",
-    "onCommand:fuse.connect"
-  ],
-  "contributes": {
-    "commands": [
-        {
-            "command": "fuse.preview.android",
-            "title": "Fuse: Preview Android"
-        },
-        {
-            "command": "fuse.preview.ios",
-            "title": "Fuse: Preview iOS"
-        },
-        {
-            "command": "fuse.preview.local",
-            "title": "Fuse: Preview local"
-        },
-        {
-            "command": "fuse.preview.local.debug",
-            "title": "Fuse: Debug local"
-        },
-        {
-            "command": "fuse.connect",
-            "title": "Fuse: Connect to daemon"
-        }
+    "name": "vscode-fuse-syntax",
+    "displayName": "Fuse Open language",
+    "description": "Code Completion",
+    "version": "1.1.1",
+    "publisher": "naumovs",
+    "engines": {
+        "vscode": "^1.37.0"
+    },
+    "icon": "preview.jpg",
+    "main": "./out/src/extension",
+    "categories": [
+        "Programming  Languages",
+        "Linters",
+        "Languages"
     ],
-    "languages": [
-      {
-          "id": "unoproj",
-          "aliases": [],
-          "extensions": [
-              ".unoproj"
-          ]
-      },
-      {
-          "id": "uno",
-          "aliases": [
-              "Uno",
-              "uno"
-          ],
-          "extensions": [
-              ".uno",
-              ".unotrace"
-          ],
-          "configuration": "./languages/uno.json"
-      },
-      {
-          "id": "ux",
-          "aliases": [
-              "UX"
-          ],
-          "extensions": [
-              ".ux"
-          ],
-          "configuration": "./languages/ux.json"
-      }
-  ],
-  "grammars": [
-      {
-          "language": "uno",
-          "scopeName": "source.uno",
-          "path": "./syntax/uno.tmLanguage"
-      },
-      {
-          "language": "ux",
-          "scopeName": "text.xml",
-          "path": "./syntax/ux.tmLanguage"
-      },
-      {
-          "language": "unoproj",
-          "scopeName": "text.unoproj",
-          "path": "./syntax/unoproj.tmLanguage"
-      }
-  ]
-  },
-  "scripts": {
-    "vscode:prepublish": "node_modules/.bin/babel src --out-dir out",
-    "dev": "babel src --out-dir out --watch",
-    "postinstall": "node ./node_modules/vscode/bin/install"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sergiirocks/vscode-fuse-syntax.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sergiirocks/vscode-fuse-syntax/issues"
-  },
-  "homepage": "https://github.com/sergiirocks/vscode-fuse-syntax#readme",
-  "dependencies": {},
-  "scripts": {
-      "vscode:prepublish": "tsc -p ./",
-      "compile": "tsc -watch -p ./",
-      "postinstall": "node ./node_modules/vscode/bin/install",
-      "test": "node ./node_modules/vscode/bin/test"
-  },
-  "devDependencies": {
-      "typescript": "^2.0.3",
-      "vscode": "^1.0.0",
-      "mocha": "^2.3.3",
-      "@types/node": "^6.0.40",
-      "@types/mocha": "^2.2.32"
-  }
+    "activationEvents": [
+        "onLanguage:uno",
+        "onLanguage:unoproj",
+        "onLanguage:ux",
+        "onCommand:fuse.connect"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "fuse.preview.android",
+                "title": "Fuse: Preview Android"
+            },
+            {
+                "command": "fuse.preview.ios",
+                "title": "Fuse: Preview iOS"
+            },
+            {
+                "command": "fuse.preview.local",
+                "title": "Fuse: Preview local"
+            },
+            {
+                "command": "fuse.preview.local.debug",
+                "title": "Fuse: Debug local"
+            },
+            {
+                "command": "fuse.connect",
+                "title": "Fuse: Connect to daemon"
+            }
+        ],
+        "languages": [
+            {
+                "id": "unoproj",
+                "aliases": [],
+                "extensions": [
+                    ".unoproj"
+                ]
+            },
+            {
+                "id": "uno",
+                "aliases": [
+                    "Uno",
+                    "uno"
+                ],
+                "extensions": [
+                    ".uno",
+                    ".unotrace"
+                ],
+                "configuration": "./languages/uno.json"
+            },
+            {
+                "id": "ux",
+                "aliases": [
+                    "UX"
+                ],
+                "extensions": [
+                    ".ux"
+                ],
+                "configuration": "./languages/ux.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "uno",
+                "scopeName": "source.uno",
+                "path": "./syntax/uno.tmLanguage"
+            },
+            {
+                "language": "ux",
+                "scopeName": "text.xml",
+                "path": "./syntax/ux.tmLanguage"
+            },
+            {
+                "language": "unoproj",
+                "scopeName": "text.unoproj",
+                "path": "./syntax/unoproj.tmLanguage"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "tsc -p ./",
+        "compile": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sergiirocks/vscode-fuse-syntax.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/sergiirocks/vscode-fuse-syntax/issues"
+    },
+    "homepage": "https://github.com/sergiirocks/vscode-fuse-syntax#readme",
+    "dependencies": {},
+    "devDependencies": {
+        "@types/mocha": "^2.2.32",
+        "@types/node": "^6.0.40",
+        "@types/vscode": "^1.37.0",
+        "mocha": "^2.3.3",
+        "typescript": "^2.0.3",
+        "vscode": "^1.1.36"
+    }
 }
