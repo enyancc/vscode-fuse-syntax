@@ -1,12 +1,13 @@
 {
     "name": "vscode-fuse-syntax",
     "displayName": "Fuse Open language",
-    "description": "Code Completion",
-    "version": "1.1.1",
+    "description": "UX and Uno IntelliSense, debugging and more",
+    "version": "2.0.0",
     "publisher": "naumovs",
     "engines": {
         "vscode": "^1.34.0"
     },
+    "license": "See LICENSE",
     "icon": "preview.jpg",
     "main": "./out/src/extension",
     "categories": [
@@ -90,6 +91,9 @@
                 "scopeName": "text.unoproj",
                 "path": "./syntax/unoproj.tmLanguage"
             }
+        ],
+        "jsonValidation": [
+            { "fileMatch": "*.unoproj", "url": "./languages/unoproj.json"}
         ]
     },
     "repository": {
@@ -97,12 +101,11 @@
         "url": "https://github.com/sergiirocks/vscode-fuse-syntax.git"
     },
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "author": "Sergii Naumov",
     "bugs": {
         "url": "https://github.com/sergiirocks/vscode-fuse-syntax/issues"
     },
-    "homepage": "https://github.com/sergiirocks/vscode-fuse-syntax#readme",
+    "homepage": "https://fuseopen.com/",
     "dependencies": {},
     "scripts": {
 		"vscode:prepublish": "npm run compile",
