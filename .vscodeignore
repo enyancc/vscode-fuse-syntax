@@ -1,9 +1,9 @@
-node_modules
 .vscode/**
-typings/**
-**/*.ts
+.vscode-test/**
+out/test/**
+test/**
+src/**
 **/*.map
 .gitignore
 tsconfig.json
-preview.gif
-src/**
+vsc-extension-quickstart.md
