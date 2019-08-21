@@ -2,11 +2,11 @@
 
 import * as vscode from 'vscode';
 import StatusBar from './statusbar';
-import Client from './client';
-import { fuseLocalPreview, fuseAndroidPreview, fuseiOSPreview, fuseLocalDebug } from './launch';
-import { CompletionProvider } from './completionprovider';
-import { HighlightProvider } from './highlightprovider';
-import Diagnostics from './diagnostics';
+import { FuseDaemon } from './Fuse/Daemon';
+import { fuseLocalPreview, fuseAndroidPreview, fuseiOSPreview, fuseLocalDebug } from './Fuse/Launcher';
+import { CompletionProvider } from './Providers/CompletionProvider';
+import { HighlightProvider } from './Providers/HighlightProvider';
+import Diagnostics from './Providers/Diagnostics';
 
 let statusBar;
 let diagnostics;
@@ -17,7 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Commands
     const connectToDaemon = vscode.commands.registerCommand('fuse.connect', () => {
-        Client.Instance.connect();
+        FuseDaemon.Instance.connect();
     });
     const commandLocalPreview = vscode.commands.registerCommand('fuse.preview.local', () => {
         fuseLocalPreview();
@@ -44,29 +44,29 @@ export function activate(context: vscode.ExtensionContext) {
     statusBar = new StatusBar();
 
     // Daemon connection/disconnect
-    Client.Instance.connected = () => {
+    FuseDaemon.Instance.connected = () => {
         statusBar.connected();
-        Client.Instance.subscribe("Fuse.BuildStarted");
-        Client.Instance.subscribe("Fuse.BuildLogged");
-        Client.Instance.subscribe("Fuse.BuildIssueDetected");
-        Client.Instance.subscribe("Fuse.BuildEnded");
+        FuseDaemon.Instance.subscribe("Fuse.BuildStarted");
+        // Client.Instance.subscribe("Fuse.BuildLogged");
+        FuseDaemon.Instance.subscribe("Fuse.BuildIssueDetected");
+        FuseDaemon.Instance.subscribe("Fuse.BuildEnded");
     }
 
-    Client.Instance.disconnected = () => {
+    FuseDaemon.Instance.disconnected = () => {
         statusBar.disconnected();
         vscode.window.showInformationMessage("Disconnected from Fuse daemon", "Reconnect").then((command) => {
             if (command === "Reconnect") {
-                Client.Instance.connect();
+                FuseDaemon.Instance.connect();
             }
         });
     }
 
-    Client.Instance.buildStarted = (data) => {
+    FuseDaemon.Instance.buildStarted = (data) => {
         statusBar.buildStarted();
         diagnostics.clear();
     };
 
-    Client.Instance.buildEnded = (data) => {
+    FuseDaemon.Instance.buildEnded = (data) => {
         diagnostics.ended(data);
         if (data.Data.Status === "Error") {
             statusBar.buildFailed();
@@ -75,15 +75,15 @@ export function activate(context: vscode.ExtensionContext) {
         }
     };
 
-    Client.Instance.buildLogged = (data) => {
+    FuseDaemon.Instance.buildLogged = (data) => {
         //console.log("Build logged: " + JSON.stringify(data));
     };
 
-    Client.Instance.buildIssueDetected = (data) => {
+    FuseDaemon.Instance.buildIssueDetected = (data) => {
         diagnostics.set(data);
     };
 
-    Client.Instance.connect();
+    FuseDaemon.Instance.connect();
 
     // Syntax hiliting
     vscode.languages.registerDocumentHighlightProvider('ux', new HighlightProvider());

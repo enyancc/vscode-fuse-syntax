@@ -1,8 +1,9 @@
 import { DiagnosticCollection, DiagnosticSeverity, languages, Uri, Diagnostic, Range, Position } from 'vscode';
+import { CaretPosition, FuseBuildIssueDetectedEvent } from '../Fuse/Daemon';
 
 export default class Diagnostics {
     collection: DiagnosticCollection;
-    diagnostics: {} = {};
+    diagnostics: { [x: string]: Diagnostic[] } = {};
 
     constructor() {
         this.collection = languages.createDiagnosticCollection("Fuse");
@@ -13,7 +14,7 @@ export default class Diagnostics {
         this.diagnostics = {};
     }
 
-    public set(data) {
+    public set(data: FuseBuildIssueDetectedEvent) {
         var severity: DiagnosticSeverity = 0;
 
         switch (data.Data.IssueType) {
@@ -59,7 +60,7 @@ export default class Diagnostics {
 
     }
 
-    public ended(data) {
+    public ended(data: any) {
         Object.keys(this.diagnostics).forEach((key) => {
             this.collection.set(Uri.file(key),
                 this.diagnostics[key]);
