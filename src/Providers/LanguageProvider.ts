@@ -159,6 +159,7 @@ function getRemapFuseKind(fusekind: string) {
         case FuseSuggestItemKind.Property:
                 return CompletionItemKind.Property;
 
+        case FuseSuggestItemKind.Namespace:
         case FuseSuggestItemKind.Importer:
                 return CompletionItemKind.Module;
 
@@ -171,7 +172,6 @@ function getRemapFuseKind(fusekind: string) {
         case FuseSuggestItemKind.Class:
             return CompletionItemKind.Class;
 
-        case FuseSuggestItemKind.Namespace:
         case FuseSuggestItemKind.Keyword:
             return CompletionItemKind.Keyword;
         default:
