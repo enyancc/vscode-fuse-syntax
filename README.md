@@ -1,4 +1,4 @@
-# [vscode-fuse-syntax](https://github.com/sergiirocks/vscode-fuse-syntax)
+# fuseopen (fusetools) vscode extention
 
 Refactored and upgraded Fuse Extention.
 
